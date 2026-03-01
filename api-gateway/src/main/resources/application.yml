@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: item-service
+              uri: http://item-service:8081
+              predicates:
+                - Path=/items/**
+
+            - id: order-service
+              uri: http://order-service:8082
+              predicates:
+                - Path=/orders/**
+
+            - id: payment-service
+              uri: http://payment-service:8083
+              predicates:
+                - Path=/payments/**
